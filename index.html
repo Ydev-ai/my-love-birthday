@@ -10,7 +10,6 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         :root {
-            /* 럭셔리 브랜드 톤의 컬러 팔레트 */
             --bg-ivory: #FCFAF8;
             --surface-color: #F5F3ED;
             --point-yellow: #FDE047;
@@ -41,7 +40,6 @@
         .serif-en { font-family: 'Cormorant Garamond', serif; }
         .serif-kr { font-family: 'Noto Serif KR', serif; }
 
-        /* 모바일 컨테이너 */
         #app {
             width: 100%; max-width: 480px; margin: 0 auto;
             background-color: var(--bg-ivory); min-height: 100vh;
@@ -50,7 +48,6 @@
             overflow: hidden;
         }
 
-        /* --- 0. 스플래시 스크린 (인트로) --- */
         #splash {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--text-dark); color: var(--point-yellow);
@@ -66,13 +63,11 @@
             animation: textReveal 2s ease-out forwards 0.5s;
         }
 
-        /* 배경 보케 */
         #bg-canvas {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1; opacity: 0.5;
         }
 
-        /* --- 1. 히어로 섹션 --- */
         .hero {
             position: relative; height: 100svh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -99,7 +94,6 @@
             animation: breathe 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- 2. 지도 섹션 --- */
         .map-section {
             padding: 100px var(--safe-padding) 80px; position: relative; z-index: 10;
             background: linear-gradient(180deg, var(--bg-ivory) 0%, var(--surface-color) 100%);
@@ -114,9 +108,8 @@
         
         .pulse-ring { transform-origin: center; animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
 
-        /* --- 3. 스태킹 타임라인 --- */
         .timeline-section {
-            padding: 0 var(--safe-padding) 180px; position: relative; z-index: 15;
+            padding: 0 var(--safe-padding) 200px; position: relative; z-index: 15;
             background: var(--surface-color);
         }
 
@@ -142,20 +135,19 @@
 
         .card-time { font-size: 26px; font-weight: 300; letter-spacing: -0.5px; }
         .card-title { font-size: 17px; font-weight: 600; }
-        .card-body { font-size: 15px; line-height: 1.6; color: var(--text-gray); margin-bottom: 24px; word-break: keep-all; }
+        .card-body { font-size: 14px; line-height: 1.6; color: var(--text-gray); margin-bottom: 24px; word-break: keep-all; }
 
         .link-chips { display: flex; gap: 8px; flex-wrap: wrap; }
         .chip {
             display: inline-flex; align-items: center; justify-content: center;
-            padding: 0 14px; min-height: 40px; 
+            padding: 0 14px; min-height: 38px; 
             background: #FFFFFF; border: 1px solid #EBE7E0; border-radius: 20px;
-            font-size: 14px; font-weight: 500; color: var(--text-dark);
+            font-size: 13px; font-weight: 500; color: var(--text-dark);
             text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: all 0.2s;
         }
         .chip:active { background: var(--surface-color); transform: scale(0.95); }
         .chip svg { margin-right: 6px; width: 14px; height: 14px; }
 
-        /* --- 4. 플로팅 내비게이션 (RSVP) --- */
         .bottom-nav {
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
             width: 100%; max-width: 480px; padding: 20px var(--safe-padding) 32px;
@@ -179,7 +171,6 @@
             transform: scale(0); animation: ripple-anim 0.6s linear; pointer-events: none;
         }
 
-        /* --- 5. 풀스크린 성공 모달 --- */
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--point-yellow); z-index: 200;
@@ -198,7 +189,6 @@
             display: inline-flex; align-items: center; gap: 6px;
         }
 
-        /* Animations */
         @keyframes textReveal { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes breathe { 0%, 100% { height: 50px; opacity: 1; } 50% { height: 30px; opacity: 0.3; } }
         @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 0.8; stroke-width: 2; } 100% { transform: scale(3); opacity: 0; stroke-width: 0; } }
@@ -306,11 +296,20 @@
                     <div class="card-title">기분 좋은 산책</div>
                 </div>
                 <div class="card-body">
-                    공기가 차가워지기 전에 따뜻한 실내로 들어갈게요. 당신이 좋아할 만한 공간들을 거닐며, 가장 잘 어울리는 예쁜 옷도 함께 골라봐요.
+                    공기가 차가워지기 전에 따뜻한 실내로 들어갈게요. 당신이 좋아할 만한 예쁜 옷과 소품들을 편안하게 둘러보며 기분 좋은 시간을 보내요.
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=시엔느+성수부티크" target="_blank" class="chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg> 쇼룸 둘러보기
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg> 시엔느
+                    </a>
+                    <a href="https://m.map.naver.com/search2/search.naver?query=룩캐스트+성수점" target="_blank" class="chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg> 룩캐스트
+                    </a>
+                    <a href="https://m.map.naver.com/search2/search.naver?query=어다울+성수" target="_blank" class="chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg> 어다울
+                    </a>
+                    <a href="https://m.map.naver.com/search2/search.naver?query=아카이브앱크+아틀리에" target="_blank" class="chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"></path></svg> 아카이브앱크
                     </a>
                 </div>
             </div>
@@ -321,11 +320,20 @@
                     <div class="card-title">따뜻한 식사</div>
                 </div>
                 <div class="card-body">
-                    오늘 하루를 로맨틱하게 마무리할, 분위기 좋은 따뜻한 공간에서의 저녁 식사. 혹시 입맛이 바뀌더라도 다 맞춰줄 수 있도록 완벽하게 준비해 뒀어요.
+                    오늘 하루를 로맨틱하게 마무리할 분위기 좋은 저녁 식사. 메인 레스토랑 외에도, 그 순간 당신이 가장 먹고 싶은 걸 고를 수 있게 다양한 차선책도 예약해 두었어요.
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=성수온실+성수본점" target="_blank" class="chip" style="background:var(--text-dark); color:var(--point-yellow); border:none;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 프라이빗 다이닝
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 성수온실
+                    </a>
+                    <a href="https://m.map.naver.com/search2/search.naver?query=스케줄+성수" target="_blank" class="chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 스케줄
+                    </a>
+                    <a href="https://m.map.naver.com/search2/search.naver?query=심퍼티쿠시+성수점" target="_blank" class="chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 심퍼티쿠시
+                    </a>
+                    <a href="https://m.map.naver.com/search2/search.naver?query=핌피+성수" target="_blank" class="chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 핌피
                     </a>
                 </div>
             </div>
