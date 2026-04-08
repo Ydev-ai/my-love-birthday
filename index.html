@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>당신을 위한 완벽한 하루</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Pretendard:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* 글로벌 스타일 & 모바일 퍼스트 뷰 세팅 */
+        :root {
+            --bg-color: #FAFAFA;
+            --primary-color: #2C423F; /* 서울숲의 짙은 녹색 */
+            --accent-color: #D4A373; /* 따뜻한 햇살과 골드 포인트 */
+            --text-main: #333333;
+            --text-light: #666666;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e9ecef; /* 데스크톱 배경 */
+            font-family: 'Pretendard', sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* 모바일 앱처럼 보이게 하는 컨테이너 */
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 헤더 섹션 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            color: var(--accent-color);
+            font-size: 24px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        /* 타임라인 섹션 */
+        .timeline {
+            padding: 40px 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        /* 인터랙티브: 스크롤 시 나타나는 클래스 */
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: rgba(212, 163, 115, 0.3);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 5px;
+            width: 10px;
+            height: 100px; /* 라인 길이 애니메이션을 위한 트릭 */
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+
+        .time {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .desc {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        /* 푸터 (초대장 수락 버튼) */
+        .footer {
+            padding: 40px 20px 60px;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .footer h2 {
+            font-family: 'Noto Serif KR', serif;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .accept-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(212, 163, 115, 0.4);
+        }
+
+        .accept-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+<div class="mobile-container">
+    <div class="hero">
+        <h1>나의 완벽한 공주님을 위한<br>프리미엄 생일 초대장</h1>
+        <p>2026. 04. 08 (수)<br>당신은 그저 예쁜 옷만 입고 오세요.</p>
+        <div class="scroll-indicator">↓</div>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="time">15:30</div>
+            <div class="title">설레는 조우, 서울숲역</div>
+            <div class="desc">
+                모든 짐과 준비물은 제가 미리 다 들고 있겠습니다.<br>
+                당신의 취향을 담은 예쁜 꽃다발과 어썸스윗 케이크를 준비해 둘 테니, 당신은 가벼운 발걸음으로 나와주세요.
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="time">16:00</div>
+            <div class="title">따뜻한 햇살 아래, 피크닉 & 자전거</div>
+            <div class="desc">
+                서울숲 가족마당에서 따스한 오후의 봄바람을 맞으며 생일을 축하해요. 
+                케이크와 커피, 그리고 인생샷을 남긴 뒤 메타세쿼이아 길을 따라 자전거를 타며 청량한 시간을 보낼 예정입니다.
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="time">17:30</div>
+            <div class="title">성수동 쇼룸, 프라이빗 하객룩 큐레이션</div>
+            <div class="desc">
+                해가 지고 쌀쌀해지기 전, 따뜻한 실내로 이동합니다. 
+                시엔느, 룩캐스트 등 평소 눈여겨보던 브랜드 쇼룸을 돌며 예쁜 하객룩을 함께 골라볼까요?
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="time">19:30</div>
+            <div class="title">완벽한 미식 정찬, 성수온실</div>
+            <div class="desc">
+                따뜻하고 아늑한 온실 속에서 트러플 크림 파스타와 함께 하루의 피로를 녹이는 완벽한 저녁 식사를 대접하겠습니다.<br>
+                (혹시 입맛이 바뀌어도 걱정 마세요. 완벽한 플랜 B, C, D가 준비되어 있습니다.)
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h2>이 완벽한 하루를<br>수락하시겠습니까?</h2>
+        <a href="javascript:alert('초대가 수락되었습니다! 4월 8일 15시 30분, 서울숲역에서 만나요 💖');" class="accept-btn">기쁜 마음으로 수락하기</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const items = document.querySelectorAll('.timeline-item');
+        
+        // 화면에 요소가 나타날 때 클래스를 추가하는 옵저버
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        items.forEach(item => {
+            observer.observe(item);
+        });
+    });
+</script>
+
+</body>
+</html>
