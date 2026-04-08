@@ -2,20 +2,20 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>4월 8일, 완벽한 하루</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         :root {
-            /* 프리미엄 컬러 팔레트 */
-            --bg-ivory: #FCFAF8; /* 따뜻한 아이보리 베이스 */
-            --point-yellow: #FDE047; /* 메인 병아리 노랑 */
+            --bg-ivory: #FCFAF8;
+            --point-yellow: #FDE047;
             --point-yellow-light: #FEF08A;
-            --text-dark: #2A2522; /* 딥 브라운 (블랙보다 우아함) */
+            --text-dark: #2A2522;
             --text-gray: #716965;
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --safe-padding: 24px; /* 모바일 안전 여백 */
         }
 
         * {
@@ -26,109 +26,119 @@
         }
 
         body {
-            background-color: #EAE6E1;
+            background-color: #EAE6E1; /* 데스크톱 배경 */
             font-family: 'Pretendard', sans-serif;
             color: var(--text-dark);
             overscroll-behavior-y: none;
+            overflow-x: hidden; /* 가로 스크롤 원천 차단 */
+            width: 100vw;
         }
 
         /* 폰트 유틸리티 */
         .serif-en { font-family: 'Cormorant Garamond', serif; }
         .serif-kr { font-family: 'Noto Serif KR', serif; }
 
-        /* 모바일 컨테이너 */
+        /* 모바일 앱 컨테이너 (좌우폭 최적화) */
         #app {
+            width: 100%;
             max-width: 480px;
             margin: 0 auto;
             background-color: var(--bg-ivory);
             min-height: 100vh;
             position: relative;
             box-shadow: 0 0 40px rgba(0,0,0,0.08);
-            overflow-x: hidden;
+            overflow: hidden; /* 내부 요소가 컨테이너를 벗어나지 못하게 함 */
+            display: flex;
+            flex-direction: column;
         }
 
-        /* 배경 보케(Bokeh) 캔버스 */
+        /* 배경 보케(Bokeh) */
         #bg-canvas {
-            position: fixed;
+            position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 1; opacity: 0.6;
+            pointer-events: none; z-index: 1; opacity: 0.5;
         }
 
         /* --- 1. 히어로 (인트로) --- */
         .hero {
             position: relative;
-            height: 100vh;
+            min-height: 100svh; /* 모바일 브라우저 주소창 고려한 높이 */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             z-index: 10;
-            padding: 40px;
+            padding: var(--safe-padding);
         }
 
         .hero-date {
-            font-size: 18px;
+            font-size: 16px;
             letter-spacing: 4px;
             color: var(--text-gray);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             animation: fadeIn 2s ease-out;
         }
 
         .hero-title {
-            font-size: 32px;
+            /* 기기 폭에 따라 유연하게 줄어드는 폰트 사이즈 (Clamp) */
+            font-size: clamp(26px, 7vw, 32px); 
             line-height: 1.4;
             font-weight: 300;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             animation: slideUp 1.5s ease-out 0.5s both;
+            word-break: keep-all; /* 단어 단위로 줄바꿈되어 깔끔함 유지 */
         }
 
         .hero-desc {
-            font-size: 15px;
+            font-size: clamp(14px, 4vw, 15px);
             line-height: 1.6;
             color: var(--text-gray);
             animation: slideUp 1.5s ease-out 1s both;
+            word-break: keep-all;
         }
 
-        /* 숨쉬는 스크롤 유도 아이콘 */
         .scroll-indicator {
             position: absolute;
-            bottom: 50px;
+            bottom: 40px;
             width: 1px;
-            height: 60px;
+            height: 50px;
             background: linear-gradient(to bottom, var(--text-dark) 0%, transparent 100%);
             animation: breathe 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- 2. 우아한 지도 섹션 --- */
+        /* --- 2. 인터랙티브 지도 섹션 --- */
         .map-section {
-            padding: 80px 24px;
+            padding: 80px var(--safe-padding);
             position: relative;
             z-index: 10;
             background: linear-gradient(180deg, var(--bg-ivory) 0%, #F5F3ED 100%);
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { font-size: 22px; font-weight: 400; margin-bottom: 8px; }
 
-        .section-header h2 {
-            font-size: 24px;
-            font-weight: 400;
-            margin-bottom: 12px;
+        .svg-map-container {
+            width: 100%;
+            /* 모바일 화면 비율에 맞춰 지도 높이 조절 */
+            aspect-ratio: 3 / 4; 
+            position: relative;
         }
 
         .svg-map {
-            width: 100%;
-            height: auto;
+            width: 100%; height: 100%;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.03));
         }
 
+        /* 지도 마커 맥박(Pulse) 애니메이션 */
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            transform-origin: center;
+        }
+
         /* --- 3. 스태킹(Stacking) 타임라인 카드 --- */
-        /* 와우 모먼트: 스크롤 시 카드가 겹겹이 쌓이는 효과 */
         .timeline-section {
-            padding: 40px 24px 120px;
+            padding: 20px var(--safe-padding) 160px; /* 하단 버튼 여백 확보 */
             position: relative;
             z-index: 15;
             background: #F5F3ED;
@@ -138,142 +148,106 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px; /* 카드 간격 축소 (작은 화면 배려) */
         }
 
         .card {
             position: sticky;
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 28px;
-            padding: 32px 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border-radius: 24px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,1);
             transform-origin: top center;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
         }
 
-        /* 카드가 쌓이는 위치 (상단 여백) */
-        .card:nth-child(1) { top: 100px; }
-        .card:nth-child(2) { top: 120px; }
-        .card:nth-child(3) { top: 140px; }
-        .card:nth-child(4) { top: 160px; }
+        /* 작은 아이폰에서도 텍스트가 가려지지 않도록 Top 위치 조밀하게 세팅 */
+        .card:nth-child(1) { top: 70px; z-index: 1; }
+        .card:nth-child(2) { top: 86px; z-index: 2; }
+        .card:nth-child(3) { top: 102px; z-index: 3; }
+        .card:nth-child(4) { top: 118px; z-index: 4; }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            padding-bottom: 12px;
         }
 
-        .card-time {
-            font-size: 28px;
-            font-weight: 300;
-            color: var(--text-dark);
-            letter-spacing: -1px;
-        }
+        .card-time { font-size: 24px; font-weight: 300; letter-spacing: -0.5px; }
+        .card-title { font-size: 17px; font-weight: 600; }
+        .card-body { font-size: 14.5px; line-height: 1.6; color: var(--text-gray); margin-bottom: 20px; word-break: keep-all; }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .card-body {
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--text-gray);
-            margin-bottom: 24px;
-        }
-
-        /* 섬세한 네이버 지도 링크 칩 */
+        /* 네이버 지도 링크 칩 (자동 줄바꿈 최적화) */
         .link-chips {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+            display: flex; gap: 8px; flex-wrap: wrap;
         }
 
         .chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 14px;
-            background: #FFFFFF;
-            border: 1px solid #EBE7E0;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-dark);
-            text-decoration: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 8px 12px; background: #FFFFFF;
+            border: 1px solid #EBE7E0; border-radius: 16px;
+            font-size: 13px; font-weight: 500; color: var(--text-dark);
+            text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
             transition: all 0.2s;
+            /* 터치 영역 확보 */
+            min-height: 36px;
         }
 
-        .chip:active {
-            background: var(--point-yellow-light);
-            border-color: var(--point-yellow);
-        }
+        .chip:active { background: var(--point-yellow-light); border-color: var(--point-yellow); transform: scale(0.96); }
+        .chip svg { margin-right: 4px; width: 14px; height: 14px; }
 
-        .chip svg {
-            margin-right: 6px;
-            width: 14px; height: 14px;
-        }
-
-        /* --- 4. RSVP 버튼 (플로팅) --- */
-        .rsvp-wrapper {
+        /* --- 4. RSVP 버튼 (블러 그라데이션 하단 고정) --- */
+        .bottom-nav {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 48px);
-            max-width: 432px;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px;
+            padding: 20px var(--safe-padding) 30px;
+            /* 버튼 뒤로 글씨가 비치는 고급스러운 블러 영역 */
+            background: linear-gradient(180deg, rgba(245,243,237,0) 0%, rgba(245,243,237,0.8) 40%, rgba(245,243,237,1) 100%);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 100;
         }
 
         .btn-rsvp {
-            width: 100%;
-            background: var(--text-dark);
-            color: var(--point-yellow);
-            border: none;
-            padding: 20px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(42, 37, 34, 0.2);
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+            position: relative; overflow: hidden;
+            width: 100%; background: var(--text-dark); color: var(--point-yellow);
+            border: none; padding: 18px; font-size: 16px; font-weight: 600;
+            border-radius: 16px; box-shadow: 0 10px 20px rgba(42, 37, 34, 0.15);
+            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+            transition: transform 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
-
         .btn-rsvp:active { transform: scale(0.97); }
 
-        /* 오버레이 모달 (수락 완료 시) */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--point-yellow);
-            z-index: 200;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-        .overlay.active {
-            opacity: 1;
-            pointer-events: all;
+        /* 터치 리플(물결) 효과 애니메이션 요소 */
+        .ripple {
+            position: absolute; border-radius: 50%; background: rgba(253, 224, 71, 0.3);
+            transform: scale(0); animation: ripple-anim 0.6s linear; pointer-events: none;
         }
 
-        /* 키프레임 애니메이션 */
+        /* --- 5. 풀스크린 오버레이 모달 --- */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--point-yellow); z-index: 200;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .overlay.active { opacity: 1; pointer-events: all; }
+
+        /* 키프레임 */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes breathe { 0%, 100% { height: 60px; opacity: 1; } 50% { height: 40px; opacity: 0.3; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes breathe { 0%, 100% { height: 50px; opacity: 1; } 50% { height: 30px; opacity: 0.3; } }
+        @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 0.8; stroke-width: 2; } 100% { transform: scale(2.5); opacity: 0; stroke-width: 0; } }
+        @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -285,7 +259,7 @@
         <div class="serif-en hero-date">WED, APRIL 08, 2026</div>
         <h1 class="serif-kr hero-title">완벽한 생일 데이트,<br>준비는 제가 다 했어요.</h1>
         <p class="hero-desc">
-            무거운 짐, 번거로운 웨이팅, 이동 경로까지.<br>
+            무거운 짐, 번거로운 웨이팅, 복잡한 이동 경로까지.<br>
             당신은 그저 가벼운 마음으로 나와주세요.
         </p>
         <div class="scroll-indicator"></div>
@@ -293,46 +267,45 @@
 
     <section class="map-section">
         <div class="section-header">
-            <div class="serif-en" style="color:var(--point-yellow-dark); font-size:14px; letter-spacing:2px; font-weight:600;">ROUTE MAP</div>
+            <div class="serif-en" style="color:var(--point-yellow-dark); font-size:12px; letter-spacing:3px; font-weight:600; margin-bottom:4px;">ROUTE MAP</div>
             <h2 class="serif-kr">오늘의 우아한 동선</h2>
         </div>
         
-        <svg class="svg-map" viewBox="0 0 300 400">
-            <defs>
-                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#EAE6E1" />
-                    <stop offset="100%" stop-color="#EAE6E1" />
-                </linearGradient>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-            </defs>
+        <div class="svg-map-container">
+            <svg class="svg-map" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#EBE7E0" />
+                        <stop offset="100%" stop-color="#EBE7E0" />
+                    </linearGradient>
+                </defs>
 
-            <path d="M 50 50 C 50 150, 250 150, 250 250 C 250 320, 100 320, 100 380" fill="none" stroke="url(#lineGrad)" stroke-width="8" stroke-linecap="round"/>
-            
-            <path id="active-path" d="M 50 50 C 50 150, 250 150, 250 250 C 250 320, 100 320, 100 380" fill="none" stroke="var(--point-yellow)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M 40 60 C 40 160, 260 160, 260 260 C 260 340, 100 340, 100 380" fill="none" stroke="url(#lineGrad)" stroke-width="6" stroke-linecap="round"/>
+                
+                <path id="active-path" d="M 40 60 C 40 160, 260 160, 260 260 C 260 340, 100 340, 100 380" fill="none" stroke="var(--point-yellow)" stroke-width="4" stroke-linecap="round"/>
 
-            <circle id="tracker-dot" cx="50" cy="50" r="6" fill="#FFFFFF" stroke="var(--point-yellow)" stroke-width="3" filter="url(#glow)"/>
+                <circle id="tracker-dot" cx="40" cy="60" r="5" fill="#FFFFFF" stroke="var(--point-yellow)" stroke-width="3" />
+                <circle id="tracker-pulse" cx="40" cy="60" r="5" fill="none" stroke="var(--point-yellow)" class="pulse-ring" />
 
-            <g transform="translate(50, 50)">
-                <circle cx="0" cy="0" r="12" fill="#FFF" stroke="var(--text-dark)" stroke-width="2"/>
-                <text x="0" y="4" font-size="10" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">1</text>
-                <text x="-30" y="25" font-size="12" fill="var(--text-gray)">서울숲역</text>
-            </g>
+                <g transform="translate(40, 60)">
+                    <circle cx="0" cy="0" r="10" fill="#FFF" stroke="var(--text-dark)" stroke-width="2"/>
+                    <text x="0" y="3.5" font-size="9" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">1</text>
+                    <text x="-25" y="24" font-size="11" fill="var(--text-gray)">서울숲역</text>
+                </g>
 
-            <g transform="translate(250, 250)">
-                <circle cx="0" cy="0" r="12" fill="#FFF" stroke="var(--text-dark)" stroke-width="2"/>
-                <text x="0" y="4" font-size="10" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">2</text>
-                <text x="15" y="-15" font-size="12" fill="var(--text-gray)">가족마당 & 쇼룸</text>
-            </g>
+                <g transform="translate(260, 260)">
+                    <circle cx="0" cy="0" r="10" fill="#FFF" stroke="var(--text-dark)" stroke-width="2"/>
+                    <text x="0" y="3.5" font-size="9" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">2</text>
+                    <text x="12" y="-12" font-size="11" fill="var(--text-gray)">가족마당 & 쇼룸</text>
+                </g>
 
-            <g transform="translate(100, 380)">
-                <circle cx="0" cy="0" r="12" fill="var(--point-yellow)" stroke="var(--text-dark)" stroke-width="2"/>
-                <text x="0" y="4" font-size="10" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">3</text>
-                <text x="18" y="5" font-size="12" font-weight="bold" fill="var(--text-dark)">성수온실</text>
-            </g>
-        </svg>
+                <g transform="translate(100, 380)">
+                    <circle cx="0" cy="0" r="12" fill="var(--point-yellow)" stroke="var(--text-dark)" stroke-width="2"/>
+                    <text x="0" y="4" font-size="10" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">3</text>
+                    <text x="18" y="4" font-size="12" font-weight="bold" fill="var(--text-dark)">성수온실</text>
+                </g>
+            </svg>
+        </div>
     </section>
 
     <section class="timeline-section">
@@ -359,7 +332,7 @@
                     <div class="card-title">햇살과 두 바퀴</div>
                 </div>
                 <div class="card-body">
-                    가장 햇살이 좋은 시간, 가족마당에 매트를 펴고 쉽니다. 사진도 남기고, 메타세쿼이아 길을 따라 자전거를 타며 청량한 봄을 즐겨요.
+                    가장 햇살이 좋은 시간, 가족마당에 매트를 펴고 쉽니다. 예쁜 사진도 남기고, 메타세쿼이아 길을 따라 자전거를 타며 청량한 봄을 즐겨요.
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=서울숲+가족마당" target="_blank" class="chip">
@@ -377,7 +350,7 @@
                     <div class="card-title">퍼스널 쇼룸 투어</div>
                 </div>
                 <div class="card-body">
-                    쌀쌀해지기 전에 실내로 들어갑니다. 평소 눈여겨보던 브랜드 쇼룸을 쾌적하게 돌며, 마음에 쏙 드는 하객룩을 함께 골라봐요.
+                    공기가 쌀쌀해지기 전에 실내로 들어갑니다. 평소 눈여겨보던 브랜드 쇼룸을 쾌적하게 돌며, 마음에 쏙 드는 하객룩을 함께 골라봐요.
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=시엔느+성수부티크" target="_blank" class="chip">
@@ -395,7 +368,7 @@
                     <div class="card-title">온실 속의 만찬</div>
                 </div>
                 <div class="card-body">
-                    아늑한 성수온실에서 트러플 크림 파스타로 하루를 완벽하게 마무리합니다. 입맛이 바뀌면 언제든 갈 수 있는 차선책도 완벽하게 준비해 뒀어요.
+                    아늑한 성수온실에서 트러플 크림 파스타로 하루를 완벽하게 마무리합니다. 입맛이 바뀌면 언제든 갈 수 있는 차선책도 준비해 뒀어요.
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=성수온실+성수본점" target="_blank" class="chip" style="background:var(--text-dark); color:var(--point-yellow); border:none;">
@@ -407,29 +380,30 @@
         </div>
     </section>
 
-    <div class="rsvp-wrapper">
-        <button class="btn-rsvp" onclick="acceptInvitation()">
+    <div class="bottom-nav">
+        <button class="btn-rsvp" id="btn-rsvp">
             일정 확인하기
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
     </div>
 
     <div class="overlay" id="success-overlay">
-        <h2 class="serif-kr" style="font-size: 32px; color: var(--text-dark); margin-bottom: 16px;">예약이 완료되었어요</h2>
-        <p style="font-size: 16px; color: var(--text-dark); opacity: 0.8;">4월 8일, 예쁜 모습으로 만나요.</p>
+        <h2 class="serif-kr" style="font-size: 28px; color: var(--text-dark); margin-bottom: 12px; font-weight:600;">예약이 완료되었어요</h2>
+        <p style="font-size: 15px; color: var(--text-dark); opacity: 0.85;">4월 8일, 예쁜 모습으로 만나요.</p>
     </div>
 
 </div>
 
 <script>
-    // 1. 은은한 배경 보케(Bokeh) 입자 효과
+    // 1. 은은한 배경 캔버스 (Bokeh) 최적화
     const bgCanvas = document.getElementById('bg-canvas');
     const bgCtx = bgCanvas.getContext('2d');
     let bgParticles = [];
 
     function resizeBg() {
-        bgCanvas.width = window.innerWidth;
-        bgCanvas.height = window.innerHeight;
+        // 모바일 해상도 고려하여 부모 컨테이너 크기만큼만 렌더링
+        bgCanvas.width = document.getElementById('app').offsetWidth;
+        bgCanvas.height = document.getElementById('app').offsetHeight;
     }
     window.addEventListener('resize', resizeBg);
     resizeBg();
@@ -438,15 +412,15 @@
         constructor() {
             this.x = Math.random() * bgCanvas.width;
             this.y = Math.random() * bgCanvas.height;
-            this.size = Math.random() * 15 + 5;
-            this.speedY = Math.random() * -0.5 - 0.1;
-            this.opacity = Math.random() * 0.5 + 0.1;
+            this.size = Math.random() * 10 + 3; // 모바일 화면에 맞게 사이즈 축소
+            this.speedY = Math.random() * -0.4 - 0.1;
+            this.opacity = Math.random() * 0.4 + 0.1;
             this.color = Math.random() > 0.5 ? '#FDE047' : '#FFFFFF';
         }
         update() {
             this.y += this.speedY;
-            if (this.y < -50) {
-                this.y = bgCanvas.height + 50;
+            if (this.y < -30) {
+                this.y = bgCanvas.height + 30;
                 this.x = Math.random() * bgCanvas.width;
             }
         }
@@ -458,8 +432,7 @@
             bgCtx.fill();
         }
     }
-
-    for (let i = 0; i < 30; i++) bgParticles.push(new Bokeh());
+    for (let i = 0; i < 20; i++) bgParticles.push(new Bokeh());
 
     function animateBg() {
         bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
@@ -468,10 +441,11 @@
     }
     animateBg();
 
-    // 2. SVG 지도 경로 드로잉 & 트래커(빛나는 점) 애니메이션
+    // 2. SVG 동선 스크롤 애니메이션 & 맥박 효과 마커
     document.addEventListener("DOMContentLoaded", () => {
         const path = document.getElementById('active-path');
         const tracker = document.getElementById('tracker-dot');
+        const pulse = document.getElementById('tracker-pulse');
         const pathLength = path.getTotalLength();
         
         path.style.strokeDasharray = pathLength + ' ' + pathLength;
@@ -481,52 +455,77 @@
             const mapSection = document.querySelector('.map-section');
             const rect = mapSection.getBoundingClientRect();
             
-            // 화면 중앙쯤 올 때부터 그려지기 시작
-            let scrollPercent = (window.innerHeight - rect.top) / (rect.height + window.innerHeight * 0.5);
+            let scrollPercent = (window.innerHeight - rect.top) / (rect.height + window.innerHeight * 0.4);
             scrollPercent = Math.max(0, Math.min(1, scrollPercent)); 
             
-            // 1) 선 그리기
             const drawLength = pathLength * scrollPercent;
             path.style.strokeDashoffset = pathLength - drawLength;
 
-            // 2) 트래커 점 이동
+            // 마커 및 맥박 링 이동
             const point = path.getPointAtLength(drawLength);
             tracker.setAttribute('cx', point.x);
             tracker.setAttribute('cy', point.y);
+            pulse.setAttribute('cx', point.x);
+            pulse.setAttribute('cy', point.y);
             
-            // 다 그려지면 트래커 숨기기
             if(scrollPercent >= 1 || scrollPercent <= 0.05) {
-                tracker.style.opacity = 0;
+                tracker.style.opacity = 0; pulse.style.opacity = 0;
             } else {
-                tracker.style.opacity = 1;
+                tracker.style.opacity = 1; pulse.style.opacity = 1;
             }
         });
     });
 
-    // 3. 카드 스태킹 축소 효과 (더 깊이감 있게)
+    // 3. 카드 스태킹 (3D 스케일 축소 효과)
     window.addEventListener('scroll', () => {
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
             const rect = card.getBoundingClientRect();
-            // 카드가 상단에 닿아서 sticky 상태가 되면 살짝 뒤로 밀리는(scale) 효과
-            if (rect.top <= 100 + (index * 20)) {
-                let scale = 1 - ((100 + (index * 20) - rect.top) * 0.001);
-                scale = Math.max(0.95, scale); // 너무 작아지지 않게 제한
+            // 각 카드의 top 위치값과 동일한 시점에 줄어들기 시작
+            const triggerPoints = [70, 86, 102, 118];
+            if (rect.top <= triggerPoints[index]) {
+                let scale = 1 - ((triggerPoints[index] - rect.top) * 0.0015);
+                scale = Math.max(0.92, scale); // 92% 까지만 작어지도록 리미트
                 card.style.transform = `scale(${scale})`;
+                // 뒤로 갈수록 살짝 어두워지는 디테일
+                card.style.opacity = scale; 
             } else {
                 card.style.transform = `scale(1)`;
+                card.style.opacity = 1;
             }
         });
     });
 
-    // 4. RSVP 버튼 클릭 이벤트 (스크린 테이크오버)
-    function acceptInvitation() {
-        const overlay = document.getElementById('success-overlay');
-        overlay.classList.add('active');
+    // 4. 버튼 터치 물결(Ripple) 효과 및 스크린 테이크오버
+    const rsvpBtn = document.getElementById('btn-rsvp');
+    rsvpBtn.addEventListener('click', function(e) {
+        // 리플 효과 생성
+        const circle = document.createElement('span');
+        circle.classList.add('ripple');
         
-        // 브라우저 기본 스크롤 막기
-        document.body.style.overflow = 'hidden';
-    }
+        const rect = this.getBoundingClientRect();
+        // 터치 위치 계산 (모바일/PC 모두 지원)
+        const clientX = e.clientX || (e.touches && e.touches[0].clientX) || rect.left + rect.width/2;
+        const clientY = e.clientY || (e.touches && e.touches[0].clientY) || rect.top + rect.height/2;
+        
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+        
+        circle.style.width = circle.style.height = Math.max(rect.width, rect.height) + 'px';
+        circle.style.left = x - Math.max(rect.width, rect.height) / 2 + 'px';
+        circle.style.top = y - Math.max(rect.width, rect.height) / 2 + 'px';
+        
+        this.appendChild(circle);
+        
+        // 0.4초 뒤 모달 띄우기
+        setTimeout(() => {
+            document.getElementById('success-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden'; // 뒤쪽 스크롤 방지
+        }, 400);
+
+        // 사용 끝난 리플 요소 제거
+        setTimeout(() => circle.remove(), 600);
+    });
 </script>
 
 </body>
