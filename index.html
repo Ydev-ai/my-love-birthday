@@ -3,247 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>당신을 위한 완벽한 하루</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Pretendard:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>A Perfect Day For You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* 글로벌 스타일 & 모바일 퍼스트 뷰 세팅 */
+        /* CSS Variables */
         :root {
-            --bg-color: #FAFAFA;
-            --primary-color: #2C423F; /* 서울숲의 짙은 녹색 */
-            --accent-color: #D4A373; /* 따뜻한 햇살과 골드 포인트 */
-            --text-main: #333333;
-            --text-light: #666666;
-        }
-        
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #e9ecef; /* 데스크톱 배경 */
-            font-family: 'Pretendard', sans-serif;
-            color: var(--text-main);
-            overflow-x: hidden;
+            --bg-base: #F9F8F6;
+            --bg-dark: #1A2C26; /* 서울숲 딥 그린 */
+            --accent-gold: #D4AF37;
+            --accent-peach: #FFB5A7;
+            --text-dark: #2C2C2C;
+            --text-light: #F9F8F6;
         }
 
-        /* 모바일 앱처럼 보이게 하는 컨테이너 */
-        .mobile-container {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #E5E5E5; /* 데스크톱 배경 */
+            font-family: 'Pretendard', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Mobile App Container */
+        #app {
             max-width: 480px;
             margin: 0 auto;
-            background-color: var(--bg-color);
+            background-color: var(--bg-base);
             min-height: 100vh;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
             position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
             overflow: hidden;
         }
 
-        /* 헤더 섹션 */
+        /* SVG Background Elements */
+        .bg-shape {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.4;
+            filter: blur(40px);
+        }
+        .shape1 { top: -10%; left: -20%; width: 300px; height: 300px; background: var(--accent-peach); border-radius: 50%; }
+        .shape2 { top: 40%; right: -20%; width: 250px; height: 250px; background: #A8D5BA; border-radius: 50%; }
+
+        /* Typography */
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Hero Section */
         .hero {
             height: 100vh;
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            padding: 20px;
+            padding: 40px;
+            z-index: 2;
         }
 
-        .hero h1 {
-            font-family: 'Noto Serif KR', serif;
-            font-size: 28px;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .hero p {
-            font-size: 16px;
-            color: var(--text-light);
-            margin-bottom: 30px;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            animation: bounce 2s infinite;
-            color: var(--accent-color);
-            font-size: 24px;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
-        }
-
-        /* 타임라인 섹션 */
-        .timeline {
-            padding: 40px 20px;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 40px;
+        .hero-date {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            transform: translateY(20px);
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            animation: fadeUp 1s 0.5s forwards;
         }
 
-        /* 인터랙티브: 스크롤 시 나타나는 클래스 */
-        .timeline-item.visible {
+        .hero-title {
+            font-size: 42px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--bg-dark);
+            margin-bottom: 24px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeUp 1s 0.8s forwards;
+        }
+
+        .hero-title i { color: var(--accent-peach); }
+
+        .hero-desc {
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 300;
+            color: #555;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeUp 1s 1.1s forwards;
+        }
+
+        /* SVG Route Map & Timeline Section */
+        .map-section {
+            position: relative;
+            padding: 80px 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            z-index: 2;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        .map-title {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        /* SVG Map Container */
+        .svg-map-container {
+            position: absolute;
+            top: 160px;
+            left: 30px;
+            height: calc(100% - 200px);
+            width: 40px;
+            z-index: 1;
+        }
+
+        /* Timeline Cards (Glassmorphism) */
+        .timeline-container {
+            position: relative;
+            z-index: 3;
+            padding-left: 60px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .card.reveal {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background-color: rgba(212, 163, 115, 0.3);
+        .card-time {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: -4px;
-            top: 5px;
-            width: 10px;
-            height: 100px; /* 라인 길이 애니메이션을 위한 트릭 */
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-        }
-
-        .time {
-            font-family: 'Noto Serif KR', serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .title {
+        .card-title {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-main);
+            margin-bottom: 12px;
+            color: white;
         }
 
-        .desc {
+        .card-desc {
             font-size: 14px;
             line-height: 1.6;
-            color: var(--text-light);
-            background: #fff;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.02);
-        }
-
-        /* 푸터 (초대장 수락 버튼) */
-        .footer {
-            padding: 40px 20px 60px;
-            text-align: center;
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .footer h2 {
-            font-family: 'Noto Serif KR', serif;
             font-weight: 300;
-            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        .accept-btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 16px;
+        /* RSVP Section */
+        .rsvp-section {
+            padding: 100px 20px;
+            text-align: center;
+            background: var(--bg-base);
+            position: relative;
+            z-index: 2;
+        }
+
+        .rsvp-title {
+            font-size: 32px;
+            color: var(--bg-dark);
+            margin-bottom: 40px;
+        }
+
+        .btn-accept {
+            appearance: none;
+            background: var(--bg-dark);
+            color: var(--accent-gold);
+            border: none;
+            padding: 20px 40px;
+            font-size: 18px;
             font-weight: 600;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            box-shadow: 0 4px 10px rgba(212, 163, 115, 0.4);
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(26, 44, 38, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Pretendard', sans-serif;
         }
 
-        .accept-btn:active {
+        .btn-accept:active {
             transform: scale(0.95);
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Keyframes */
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
     </style>
 </head>
 <body>
 
-<div class="mobile-container">
-    <div class="hero">
-        <h1>나의 완벽한 공주님을 위한<br>프리미엄 생일 초대장</h1>
-        <p>2026. 04. 08 (수)<br>당신은 그저 예쁜 옷만 입고 오세요.</p>
-        <div class="scroll-indicator">↓</div>
-    </div>
+<div id="app">
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
 
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="time">15:30</div>
-            <div class="title">설레는 조우, 서울숲역</div>
-            <div class="desc">
-                모든 짐과 준비물은 제가 미리 다 들고 있겠습니다.<br>
-                당신의 취향을 담은 예쁜 꽃다발과 어썸스윗 케이크를 준비해 둘 테니, 당신은 가벼운 발걸음으로 나와주세요.
-            </div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <section class="hero">
+        <div class="hero-date">April 08, 2026</div>
+        <h1 class="hero-title">The Perfect<br><i>Sequence</i><br>For You.</h1>
+        <p class="hero-desc">
+            모든 짐과 번거로움은 제가 책임지겠습니다.<br>
+            당신은 그저 가장 예쁜 모습으로, 가벼운 발걸음만 준비해 주세요.
+        </p>
+        
+        <svg style="position:absolute; bottom:40px; left:50%; transform:translateX(-50%); width:30px; height:30px; animation: fadeUp 1s 1.5s forwards, pulse 2s infinite; opacity:0;" viewBox="0 0 24 24" fill="none" stroke="var(--bg-dark)" stroke-width="2">
+            <path d="M12 5v14M19 12l-7 7-7-7"/>
+        </svg>
+    </section>
+
+    <section class="map-section">
+        <h2 class="map-title">Your Route Map</h2>
+
+        <div class="svg-map-container">
+            <svg viewBox="0 0 40 800" width="100%" height="100%" preserveAspectRatio="none">
+                <path d="M 20 0 L 20 800" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="6,6" fill="none"/>
+                <path id="route-path" d="M 20 0 L 20 800" stroke="var(--accent-gold)" stroke-width="4" fill="none" />
+                
+                <circle cx="20" cy="50" r="8" fill="var(--bg-dark)" stroke="var(--accent-gold)" stroke-width="3"/>
+                <circle cx="20" cy="270" r="8" fill="var(--bg-dark)" stroke="var(--accent-gold)" stroke-width="3"/>
+                <circle cx="20" cy="490" r="8" fill="var(--bg-dark)" stroke="var(--accent-gold)" stroke-width="3"/>
+                <circle cx="20" cy="710" r="8" fill="var(--bg-dark)" stroke="var(--accent-gold)" stroke-width="3"/>
+            </svg>
         </div>
 
-        <div class="timeline-item">
-            <div class="time">16:00</div>
-            <div class="title">따뜻한 햇살 아래, 피크닉 & 자전거</div>
-            <div class="desc">
-                서울숲 가족마당에서 따스한 오후의 봄바람을 맞으며 생일을 축하해요. 
-                케이크와 커피, 그리고 인생샷을 남긴 뒤 메타세쿼이아 길을 따라 자전거를 타며 청량한 시간을 보낼 예정입니다.
+        <div class="timeline-container">
+            <div class="card js-reveal">
+                <div class="card-time">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    15:30
+                </div>
+                <div class="card-title">설레는 조우, 서울숲역</div>
+                <div class="card-desc">
+                    꽃다발, 어썸스윗 레터링 케이크, 감성 피크닉 세트까지. 당신을 위한 모든 인프라를 완벽하게 세팅한 채 기다리고 있겠습니다.
+                </div>
+            </div>
+
+            <div class="card js-reveal">
+                <div class="card-time">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    16:00
+                </div>
+                <div class="card-title">가족마당 피크닉 & 자전거</div>
+                <div class="card-desc">
+                    가장 햇살이 좋은 시간. 방수 매트 위에서 따뜻한 봄바람을 맞으며 인생샷을 남기고, 메타세쿼이아 길을 따라 청량한 자전거 데이트를 즐깁니다.
+                </div>
+            </div>
+
+            <div class="card js-reveal">
+                <div class="card-time">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    17:30
+                </div>
+                <div class="card-title">프라이빗 하객룩 큐레이션</div>
+                <div class="card-desc">
+                    기온이 떨어지기 전 실내로 이동합니다. 연무장길의 시엔느, 룩캐스트 쇼룸을 방문하여 당신에게 가장 잘 어울리는 하객룩을 함께 골라보는 시간.
+                </div>
+            </div>
+
+            <div class="card js-reveal">
+                <div class="card-time">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                    19:30
+                </div>
+                <div class="card-title">완벽한 미식, 성수온실</div>
+                <div class="card-desc">
+                    아늑한 온실 속에서 트러플 크림 파스타와 함께 하루를 마무리합니다. (물론, 변덕스러운 입맛에 대비한 플랜 B, C 식당도 완벽히 준비되어 있습니다.)
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="timeline-item">
-            <div class="time">17:30</div>
-            <div class="title">성수동 쇼룸, 프라이빗 하객룩 큐레이션</div>
-            <div class="desc">
-                해가 지고 쌀쌀해지기 전, 따뜻한 실내로 이동합니다. 
-                시엔느, 룩캐스트 등 평소 눈여겨보던 브랜드 쇼룸을 돌며 예쁜 하객룩을 함께 골라볼까요?
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="time">19:30</div>
-            <div class="title">완벽한 미식 정찬, 성수온실</div>
-            <div class="desc">
-                따뜻하고 아늑한 온실 속에서 트러플 크림 파스타와 함께 하루의 피로를 녹이는 완벽한 저녁 식사를 대접하겠습니다.<br>
-                (혹시 입맛이 바뀌어도 걱정 마세요. 완벽한 플랜 B, C, D가 준비되어 있습니다.)
-            </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <h2>이 완벽한 하루를<br>수락하시겠습니까?</h2>
-        <a href="javascript:alert('초대가 수락되었습니다! 4월 8일 15시 30분, 서울숲역에서 만나요 💖');" class="accept-btn">기쁜 마음으로 수락하기</a>
-    </div>
+    <section class="rsvp-section">
+        <h2 class="rsvp-title">Shall we?</h2>
+        <button class="btn-accept" id="btn-rsvp">기쁜 마음으로 수락하기</button>
+    </section>
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const items = document.querySelectorAll('.timeline-item');
-        
-        // 화면에 요소가 나타날 때 클래스를 추가하는 옵저버
-        const observer = new IntersectionObserver((entries) => {
+    document.addEventListener("DOMContentLoaded", () => {
+        // 1. Scroll Reveal Animation for Cards
+        const revealElements = document.querySelectorAll('.js-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
 
-        items.forEach(item => {
-            observer.observe(item);
+        // 2. SVG Route Map Path Animation
+        const path = document.getElementById('route-path');
+        const pathLength = path.getTotalLength();
+        
+        path.style.strokeDasharray = pathLength + ' ' + pathLength;
+        path.style.strokeDashoffset = pathLength;
+
+        window.addEventListener('scroll', () => {
+            // Calculate scroll percentage within the map section
+            const mapSection = document.querySelector('.map-section');
+            const rect = mapSection.getBoundingClientRect();
+            
+            // Start drawing when section enters viewport, finish when it leaves
+            let scrollPercentage = (window.innerHeight - rect.top) / (rect.height + window.innerHeight);
+            
+            // Clamp between 0 and 1
+            scrollPercentage = Math.max(0, Math.min(1, scrollPercentage));
+            
+            // Easing function for smoother drawing
+            const easeOut = 1 - Math.pow(1 - scrollPercentage, 3);
+            
+            const drawLength = pathLength * easeOut;
+            path.style.strokeDashoffset = pathLength - drawLength;
+        });
+
+        // 3. Built-in Confetti Engine (No external libraries)
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 10 + 5;
+                this.speedX = Math.random() * 6 - 3;
+                this.speedY = Math.random() * -8 - 5;
+                this.color = ['#D4AF37', '#FFB5A7', '#A8D5BA', '#1A2C26'][Math.floor(Math.random() * 4)];
+                this.gravity = 0.2;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 10 - 5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += this.gravity;
+                this.rotation += this.rotationSpeed;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function createConfetti(x, y) {
+            for(let i = 0; i < 100; i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                if(p.y > canvas.height) particles.splice(index, 1);
+            });
+            if(particles.length > 0) {
+                animationId = requestAnimationFrame(animateConfetti);
+            }
+        }
+
+        // RSVP Button Interaction
+        const rsvpBtn = document.getElementById('btn-rsvp');
+        rsvpBtn.addEventListener('click', (e) => {
+            const rect = rsvpBtn.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top;
+            
+            createConfetti(x, y);
+            if(!animationId || particles.length === 100) {
+                animateConfetti();
+            }
+            
+            // Change button state
+            rsvpBtn.style.background = 'var(--accent-gold)';
+            rsvpBtn.style.color = '#fff';
+            rsvpBtn.innerHTML = '✨ 예약 완료되었습니다 ✨';
+            
+            setTimeout(() => {
+                alert('초대가 수락되었습니다! 4월 8일 15시 30분, 당신만을 위한 완벽한 하루가 시작됩니다 💖');
+            }, 800);
         });
     });
 </script>
