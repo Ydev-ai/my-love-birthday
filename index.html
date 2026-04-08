@@ -25,17 +25,17 @@
         * {
             box-sizing: border-box;
             margin: 0; padding: 0;
-            -webkit-tap-highlight-color: transparent; /* 안드로이드 터치 하이라이트 제거 */
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: #EAE6E1;
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             color: var(--text-dark);
-            overscroll-behavior-y: none; /* 바운스 스크롤 제어 */
+            overscroll-behavior-y: none; 
             overflow-x: hidden;
             width: 100vw;
-            -webkit-font-smoothing: antialiased; /* 폰트 렌더링 부드럽게 */
+            -webkit-font-smoothing: antialiased; 
         }
 
         .serif-en { font-family: 'Cormorant Garamond', serif; }
@@ -77,7 +77,7 @@
             position: relative; height: 100svh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; z-index: 10; padding: var(--safe-padding);
-            will-change: transform, opacity; /* 렌더링 최적화 */
+            will-change: transform, opacity;
         }
 
         .hero-date {
@@ -85,7 +85,7 @@
         }
 
         .hero-title {
-            font-size: clamp(26px, 7vw, 34px); line-height: 1.4; font-weight: 300;
+            font-size: clamp(24px, 7vw, 32px); line-height: 1.4; font-weight: 300;
             margin-bottom: 24px; word-break: keep-all;
         }
 
@@ -147,7 +147,7 @@
         .link-chips { display: flex; gap: 8px; flex-wrap: wrap; }
         .chip {
             display: inline-flex; align-items: center; justify-content: center;
-            padding: 0 14px; min-height: 40px; /* 애플 휴먼 인터페이스 가이드라인 터치 영역 충족 */
+            padding: 0 14px; min-height: 40px; 
             background: #FFFFFF; border: 1px solid #EBE7E0; border-radius: 20px;
             font-size: 14px; font-weight: 500; color: var(--text-dark);
             text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: all 0.2s;
@@ -216,9 +216,9 @@
 
     <section class="hero" id="hero-section">
         <div class="serif-en hero-date" style="opacity:0; animation: textReveal 1.5s ease-out 2s forwards;">04. 08. 2026</div>
-        <h1 class="serif-kr hero-title" style="opacity:0; animation: textReveal 1.5s ease-out 2.3s forwards;">완벽한 생일 데이트,<br>준비는 제가 다 했어요.</h1>
+        <h1 class="serif-kr hero-title" style="opacity:0; animation: textReveal 1.5s ease-out 2.3s forwards;">당신을 위한 하루,<br>준비는 제가 다 했어요.</h1>
         <p class="hero-desc" style="opacity:0; animation: textReveal 1.5s ease-out 2.6s forwards;">
-            무거운 짐, 번거로운 웨이팅, 복잡한 이동 경로까지.<br>당신은 그저 예쁜 모습으로 나와주세요.
+            무거운 짐도, 번거로운 고민도 필요 없어요.<br>당신은 그저 편안한 마음으로,<br>가장 예쁜 미소만 챙겨와 주세요.
         </p>
         <div class="scroll-indicator" style="opacity:0; animation: breathe 2s infinite cubic-bezier(0.4, 0, 0.2, 1) 3s forwards;"></div>
     </section>
@@ -226,7 +226,7 @@
     <section class="map-section">
         <div class="section-header">
             <p class="serif-en">THE BLUEPRINT</p>
-            <h2 class="serif-kr">우리의 우아한 동선</h2>
+            <h2 class="serif-kr">기분 좋은 걸음들</h2>
         </div>
         
         <div class="svg-map-container">
@@ -248,17 +248,17 @@
                 <g transform="translate(40, 60)">
                     <circle cx="0" cy="0" r="10" fill="#FFF" stroke="var(--text-dark)" stroke-width="2"/>
                     <text x="0" y="3.5" font-size="9" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">1</text>
-                    <text x="-25" y="24" font-size="11" fill="var(--text-gray)">서울숲역</text>
+                    <text x="16" y="4" font-size="11" fill="var(--text-gray)" text-anchor="start">우리의 만남</text>
                 </g>
                 <g transform="translate(260, 260)">
                     <circle cx="0" cy="0" r="10" fill="#FFF" stroke="var(--text-dark)" stroke-width="2"/>
                     <text x="0" y="3.5" font-size="9" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">2</text>
-                    <text x="12" y="-12" font-size="11" fill="var(--text-gray)">가족마당 & 쇼룸</text>
+                    <text x="-16" y="4" font-size="11" fill="var(--text-gray)" text-anchor="end">공원과 예쁜 쇼룸</text>
                 </g>
                 <g transform="translate(100, 380)">
                     <circle cx="0" cy="0" r="12" fill="var(--point-yellow)" stroke="var(--text-dark)" stroke-width="2"/>
                     <text x="0" y="4" font-size="10" font-weight="bold" fill="var(--text-dark)" text-anchor="middle">3</text>
-                    <text x="18" y="4" font-size="12" font-weight="bold" fill="var(--text-dark)">성수온실</text>
+                    <text x="18" y="4" font-size="12" font-weight="bold" fill="var(--text-dark)">저녁 식사</text>
                 </g>
             </svg>
         </div>
@@ -273,11 +273,11 @@
                     <div class="card-title">설레는 조우</div>
                 </div>
                 <div class="card-body">
-                    약속 장소는 서울숲역. 당신의 취향을 담은 꽃다발, 어썸스윗 레터링 케이크, 피크닉 세트까지 모든 짐은 제가 완벽하게 세팅해 둘게요.
+                    우리의 시작은 서울숲역. 당신을 미소 짓게 할 예쁜 꽃과 달콤한 케이크, 피크닉 준비물까지 모두 들고 기다릴게요. 양손은 가볍게, 마음은 설레게 와주세요.
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=서울숲역" target="_blank" class="chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> 서울숲역
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> 약속 장소
                     </a>
                 </div>
             </div>
@@ -288,14 +288,14 @@
                     <div class="card-title">햇살과 두 바퀴</div>
                 </div>
                 <div class="card-body">
-                    가장 따뜻한 시간, 가족마당에 매트를 펴고 쉽니다. 예쁜 사진도 남기고 메타세쿼이아 길을 따라 나란히 자전거를 타며 봄을 즐겨요.
+                    가장 볕이 좋은 시간, 잔디밭에 편하게 앉아 여유로운 봄바람을 맞아요. 예쁜 사진도 남기고, 메타세쿼이아 길을 따라 나란히 자전거도 타볼까요?
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=서울숲+가족마당" target="_blank" class="chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 가족마당
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 따스한 잔디밭
                     </a>
                     <a href="https://m.map.naver.com/search2/search.naver?query=페달세상" target="_blank" class="chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 페달세상
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 자전거 타기
                     </a>
                 </div>
             </div>
@@ -303,17 +303,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="serif-en card-time">17:30</div>
-                    <div class="card-title">퍼스널 쇼룸 투어</div>
+                    <div class="card-title">기분 좋은 산책</div>
                 </div>
                 <div class="card-body">
-                    공기가 쌀쌀해지기 전에 실내로 이동합니다. 눈여겨보던 브랜드 쇼룸을 돌며 당신에게 가장 잘 어울리는 하객룩을 함께 큐레이션 해요.
+                    공기가 차가워지기 전에 따뜻한 실내로 들어갈게요. 당신이 좋아할 만한 공간들을 거닐며, 가장 잘 어울리는 예쁜 옷도 함께 골라봐요.
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=시엔느+성수부티크" target="_blank" class="chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg> 시엔느
-                    </a>
-                    <a href="https://m.map.naver.com/search2/search.naver?query=룩캐스트+성수점" target="_blank" class="chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg> 룩캐스트
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg> 쇼룸 둘러보기
                     </a>
                 </div>
             </div>
@@ -321,14 +318,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="serif-en card-time">19:30</div>
-                    <div class="card-title">온실 속의 만찬</div>
+                    <div class="card-title">따뜻한 식사</div>
                 </div>
                 <div class="card-body">
-                    아늑한 성수온실에서 트러플 크림 파스타로 하루를 로맨틱하게 마무리합니다. 입맛이 바뀌어도 걱정 마세요. 대안 식당도 모두 알아뒀어요.
+                    오늘 하루를 로맨틱하게 마무리할, 분위기 좋은 따뜻한 공간에서의 저녁 식사. 혹시 입맛이 바뀌더라도 다 맞춰줄 수 있도록 완벽하게 준비해 뒀어요.
                 </div>
                 <div class="link-chips">
                     <a href="https://m.map.naver.com/search2/search.naver?query=성수온실+성수본점" target="_blank" class="chip" style="background:var(--text-dark); color:var(--point-yellow); border:none;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 성수온실
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg> 프라이빗 다이닝
                     </a>
                 </div>
             </div>
@@ -350,7 +347,7 @@
             
             <button class="btn-copy" onclick="copySchedule()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                일정 텍스트로 복사하기
+                일정 텍스트로 보관하기
             </button>
         </div>
     </div>
@@ -362,17 +359,17 @@
     window.addEventListener('load', () => {
         setTimeout(() => {
             document.getElementById('splash').classList.add('fade-out');
-        }, 2200); // 2.2초 후 메인으로 전환
+        }, 2200); 
     });
 
-    // 1. 보케 애니메이션 (성능 최적화)
+    // 1. 보케 애니메이션
     const bgCanvas = document.getElementById('bg-canvas');
     const bgCtx = bgCanvas.getContext('2d');
     let bgParticles = [];
 
     function resizeBg() {
         bgCanvas.width = document.getElementById('app').offsetWidth;
-        bgCanvas.height = window.innerHeight; // 뷰포트 높이 기반
+        bgCanvas.height = window.innerHeight; 
     }
     window.addEventListener('resize', resizeBg);
     resizeBg();
@@ -380,7 +377,7 @@
     class Bokeh {
         constructor() {
             this.reset();
-            this.y = Math.random() * bgCanvas.height; // 초기엔 화면 전체에 분포
+            this.y = Math.random() * bgCanvas.height; 
         }
         reset() {
             this.x = Math.random() * bgCanvas.width;
@@ -402,7 +399,7 @@
             bgCtx.fill();
         }
     }
-    for (let i = 0; i < 15; i++) bgParticles.push(new Bokeh()); // 모바일 성능을 위해 15개로 제한
+    for (let i = 0; i < 15; i++) bgParticles.push(new Bokeh()); 
 
     function animateBg() {
         bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
@@ -411,7 +408,7 @@
     }
     animateBg();
 
-    // 2. 통합 스크롤 이벤트 (requestAnimationFrame 기반 성능 최적화)
+    // 2. 통합 스크롤 이벤트 (성능 최적화)
     const path = document.getElementById('active-path');
     const tracker = document.getElementById('tracker-dot');
     const pulse = document.getElementById('tracker-pulse');
@@ -419,7 +416,7 @@
     const mapSection = document.querySelector('.map-section');
     const heroSection = document.getElementById('hero-section');
     const cards = document.querySelectorAll('.card');
-    const triggerPoints = [60, 76, 92, 108]; // 카드 스태킹 Top 값과 동일
+    const triggerPoints = [60, 76, 92, 108]; 
 
     path.style.strokeDasharray = pathLength + ' ' + pathLength;
     path.style.strokeDashoffset = pathLength;
@@ -430,12 +427,12 @@
         const scrollY = window.scrollY;
         const innerHeight = window.innerHeight;
 
-        // A. 히어로 패럴랙스 (텍스트가 스크롤보다 느리게 위로 올라감)
+        // 패럴랙스
         if (scrollY < innerHeight) {
             heroSection.style.transform = `translateY(${scrollY * 0.3}px)`;
         }
 
-        // B. 지도 애니메이션
+        // 지도 애니메이션
         const mapRect = mapSection.getBoundingClientRect();
         let scrollPercent = (innerHeight - mapRect.top) / (mapRect.height + innerHeight * 0.4);
         scrollPercent = Math.max(0, Math.min(1, scrollPercent)); 
@@ -453,7 +450,7 @@
             tracker.style.opacity = 1; pulse.style.opacity = 1;
         }
 
-        // C. 스태킹 카드 3D 뎁스
+        // 스태킹 뎁스
         cards.forEach((card, index) => {
             const rect = card.getBoundingClientRect();
             if (rect.top <= triggerPoints[index]) {
@@ -476,12 +473,11 @@
             });
             ticking = true;
         }
-    }, { passive: true }); // 브라우저 스크롤 성능 최적화 옵션
+    }, { passive: true });
 
     // 3. 버튼 리플 및 모달 제어
     const rsvpBtn = document.getElementById('btn-rsvp');
     rsvpBtn.addEventListener('click', function(e) {
-        // 리플 효과
         const circle = document.createElement('span');
         circle.classList.add('ripple');
         const rect = this.getBoundingClientRect();
@@ -495,7 +491,7 @@
         this.appendChild(circle);
         
         this.classList.add('success');
-        this.innerHTML = '예약 확인 중...';
+        this.innerHTML = '안내해 드릴게요...';
 
         setTimeout(() => {
             document.getElementById('success-overlay').classList.add('active');
@@ -505,12 +501,12 @@
         setTimeout(() => circle.remove(), 600);
     });
 
-    // 4. 클립보드 복사 유틸리티
+    // 4. 클립보드 복사
     function copySchedule() {
-        const text = `[4월 8일 생일 데이트 스케줄]\n- 15:30 서울숲역 조우 (짐 보관 완료)\n- 16:00 서울숲 피크닉 & 자전거\n- 17:30 연무장길 쇼룸 투어 (하객룩 픽업)\n- 19:30 성수온실 정찬 (대안 식당 확보 완료)\n\n*예쁜 모습과 가벼운 마음만 챙겨오세요!`;
+        const text = `[우리의 기분 좋은 봄날, 스케줄 💛]\n\n- 15:30 두 손 가볍게, 서울숲역에서 만나요\n- 16:00 따뜻한 잔디밭에서 피크닉과 산책\n- 17:30 춥기 전에 실내로, 예쁜 쇼룸 구경\n- 19:30 따뜻한 공간에서 맛있는 저녁 식사\n\n*당신은 그저 예쁜 미소만 챙겨와 주세요!`;
         navigator.clipboard.writeText(text).then(() => {
             const btn = document.querySelector('.btn-copy');
-            btn.innerHTML = '✨ 클립보드에 복사되었습니다';
+            btn.innerHTML = '✨ 내용이 보관되었습니다';
             btn.style.background = 'var(--text-dark)';
             btn.style.color = 'var(--point-yellow)';
         }).catch(err => {
